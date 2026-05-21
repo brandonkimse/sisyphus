@@ -49,3 +49,17 @@ drop trigger if exists on_auth_user_created_sisyphus on auth.users;
 create trigger on_auth_user_created_sisyphus
   after insert on auth.users
   for each row execute procedure public.handle_new_sisyphus_user();
+
+-- 5. Create robust RPC to increment vent count
+create or replace function public.increment_vent_count(user_id uuid)
+returns void
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  update public.profiles
+  set vent_count = coalesce(vent_count, 0) + 1
+  where id = user_id;
+end;
+$$;
+

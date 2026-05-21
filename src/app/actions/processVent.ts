@@ -138,10 +138,14 @@ Output strictly in JSON format matching the schema provided.`,
 
     // Increment usage
     if (user) {
-      await supabase.rpc('increment_vent_count', { user_id: user.id });
-      // Alternatively without RPC since RLS allows update:
-      if (profile) {
-        await supabase.from('profiles').update({ vent_count: profile.vent_count + 1 }).eq('id', user.id);
+      try {
+        const { error: rpcError } = await supabase.rpc('increment_vent_count', { user_id: user.id });
+        if (rpcError) throw rpcError;
+      } catch (rpcErr) {
+        console.warn('RPC increment_vent_count failed, falling back to direct update:', rpcErr);
+        if (profile) {
+          await supabase.from('profiles').update({ vent_count: (profile.vent_count || 0) + 1 }).eq('id', user.id);
+        }
       }
     }
 
