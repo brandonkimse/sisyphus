@@ -40,7 +40,8 @@ export async function processVentText(text: string): Promise<ProcessVentResponse
   const { data: profile } = await supabase.from('profiles').select('vent_count, subscription_status').eq('id', user.id).single();
   
   if (profile) {
-    if (profile.vent_count >= 3 && profile.subscription_status !== 'active') {
+    // Temporarily disabled free limit check
+    if (false && profile.vent_count >= 3 && profile.subscription_status !== 'active') {
       return { 
         tasks: [], 
         error: 'FREE_LIMIT_REACHED'

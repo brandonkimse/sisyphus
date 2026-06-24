@@ -84,7 +84,8 @@ export default function MainApp({
                   <Crown className="w-4 h-4" /> Premium
                 </span>
               ) : (
-                <span className="text-zinc-500">Free Tier ({ventCount}/3 used)</span>
+                /* Temporarily disabled free tier indicator */
+                null
               )}
               <form action={logout}>
                 <button type="submit" className="flex items-center gap-1 text-zinc-400 hover:text-white transition-colors">
