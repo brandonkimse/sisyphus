@@ -94,7 +94,8 @@ export default function MainApp({
             </div>
             
             <div className="flex items-center gap-3">
-              {!isPremium && (
+              {/* Temporarily disabled paid feature button */}
+              {false && !isPremium && (
                 <button
                   onClick={handleCheckout}
                   disabled={isCheckoutLoading}
