@@ -41,12 +41,14 @@ export async function processVentText(text: string): Promise<ProcessVentResponse
   
   if (profile) {
     // Temporarily disabled free limit check
-    if (false && profile.vent_count >= 3 && profile.subscription_status !== 'active') {
+    /*
+    if (profile.vent_count >= 3 && profile.subscription_status !== 'active') {
       return { 
         tasks: [], 
         error: 'FREE_LIMIT_REACHED'
       };
     }
+    */
   }
 
   try {
