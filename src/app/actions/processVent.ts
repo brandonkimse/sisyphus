@@ -156,7 +156,7 @@ Output strictly in JSON format matching the schema provided.`,
   } catch (error) {
     console.error('Error parsing vent text with AI:', error);
     
-    let insertedFallback: any[] | null = null;
+    let insertedFallback: Record<string, unknown>[] | null = null;
     try {
       const fallbackTask = {
         user_id: user.id,

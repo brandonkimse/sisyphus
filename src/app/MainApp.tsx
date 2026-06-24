@@ -13,7 +13,7 @@ import { LogOut, Crown, Loader2 } from 'lucide-react';
 export default function MainApp({ 
   userEmail, 
   isPremium, 
-  ventCount,
+  ventCount: _ventCount,
   initialTasks = []
 }: { 
   userEmail: string; 
